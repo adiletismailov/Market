@@ -6,17 +6,21 @@ import com.company.company.enums.Market;
 import com.company.company.enums.Products;
 import com.company.company.interfaces.Service;
 
+import java.io.PrintStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 
 public class ServiceImpl implements Service {
     List<BankCard> bankCardsList = new ArrayList<>();
     List<Client> clientList = new ArrayList<>();
-    Products[] products;
     Market markets;
+    List<Long> longList = new ArrayList<>();
+    List<String> products1 = new ArrayList<>();
+
+
 
     @Override
     public String creatClient() {
@@ -87,27 +91,47 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public long goToTheMarket() {
-        List<Long> longList = new ArrayList<>();
+    public String goToTheMarket() {
         for (Products p1 : Products.values()) {
             System.out.println(p1.getName() + " " + p1.getPrice());
         }
+        long summa = 0;
         while (true) {
-            long summa = 0;
             System.out.print("Purchase: ");
             String name = new Scanner(System.in).nextLine();
             System.out.println("Yes/no");
             String a = new Scanner(System.in).nextLine();
             if (a.equalsIgnoreCase("Yes")) {
                 for (Products p : Products.values()) {
-                    if (p.getName().equals(name)) {
+                    if (p.name().equalsIgnoreCase(name)) {
+                        products1.add(p.name());
+                        System.out.println(p.getName() + " " + p.getPrice());
                         summa += p.getPrice();
-                        System.out.println(summa);
                     }
                 }
             } else {
                 break;
             }
-        }return 0;
-    }
-}
+        }
+        longList.add(summa);
+        return "Itog:" + summa;
+        }
+
+
+    @Override
+    public String getAllChek() {
+       System.out.printf("""
+                        ~~~~~~~~~~~ Chek ~~~~~~~~~~~~~~
+                        1.Ким алды: %s
+                        2.Маркеттин аты: %s
+                        3.Список товаров: %s
+                        4.Общая стоимость товаров: %s
+                        5.Если есть акции
+                        6.Общая стоимость после скидки:
+                        7.Дата: %s: %s
+                                                
+                        Спасибо за покупку:\020""", clientList.get(0).getFirstName(), Market.GLOBUS,
+                products1, longList, LocalDate.now(),LocalTime.now()
+        );
+        return "";
+}}

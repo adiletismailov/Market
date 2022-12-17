@@ -17,6 +17,7 @@ public class Main {
                     2. Get all client:
                     3  Get all product:
                     4. Go to the Market:
+                    5. Chek:
                                         
                     Write a command:\020""");
             int number = new Scanner(System.in).nextInt();
@@ -27,6 +28,7 @@ public class Main {
 //                case 3 -> System.out.println(service.getAllBankCard());
                 case 3 -> System.out.println(service.getMarkets());
                 case 4 -> System.out.println(service.goToTheMarket());
+                case 5 -> System.out.println(service.getAllChek());
             }
         }
     }

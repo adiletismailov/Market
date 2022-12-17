@@ -12,6 +12,7 @@ public interface Service {
     List<BankCard> getAllBankCard();
     List<Client> getAllClient();
     List<Products[]> getMarkets();
-    long goToTheMarket();
+    String goToTheMarket();
+    String getAllChek();
 
 }
